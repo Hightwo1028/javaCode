@@ -1,9 +1,10 @@
 package tw.hightwo.js;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Line {
+public class Line implements Serializable {
 	private Color color;
 	private float width;
 	private LinkedList<Point> line;

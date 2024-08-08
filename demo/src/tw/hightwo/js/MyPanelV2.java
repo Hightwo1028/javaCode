@@ -6,15 +6,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 
-import javax.sound.sampled.LineListener;
-import javax.swing.DebugGraphics;
 import javax.swing.JPanel;
 
 public class MyPanelV2 extends JPanel {
 	private LinkedList<Line> lines, recycle;
 	private Color nowColor;
+	private float strokeWidth;
+
+
 
 	public MyPanelV2() {
 		setBackground(Color.gray);
@@ -23,6 +30,7 @@ public class MyPanelV2 extends JPanel {
 		recycle = new LinkedList<>();
 
 		nowColor = Color.BLACK;
+		strokeWidth = 4.0f;
 		MyListener myListener = new MyListener();
 
 		addMouseListener(myListener);
@@ -34,8 +42,8 @@ public class MyPanelV2 extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			recycle.clear();
-			Line line = new Line(nowColor, 4);
 
+			Line line = new Line(nowColor, strokeWidth);
 			Point point = new Point(e.getX(), e.getY());
 			line.addPoint(point);
 
@@ -94,8 +102,35 @@ public class MyPanelV2 extends JPanel {
 	public Color getColor() {
 		return nowColor;
 	}
-	
+
 	public void setColor(Color color) {
 		nowColor = color;
+	}
+	
+	public void setStroke(float width) {
+		strokeWidth = width;
+	}
+
+	public void saveLines(File saveFile) throws Exception {
+		ObjectOutputStream oout = new ObjectOutputStream(new FileOutputStream(saveFile));
+		oout.writeObject(lines);
+		oout.flush();
+		oout.close();
+	}
+
+	public void loadLines(File loadFile) throws Exception {
+		try (ObjectInputStream oin = new ObjectInputStream(new FileInputStream(loadFile))) {
+			Object obj = oin.readObject();
+			lines = (LinkedList<Line>) obj;
+			repaint();
+		}
+	}
+	
+	public BufferedImage getImage() {
+		BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2 = image.createGraphics();
+		this.paint(g2);
+		g2.dispose();
+		return image;
 	}
 }
