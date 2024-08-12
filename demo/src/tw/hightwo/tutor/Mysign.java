@@ -18,7 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import tw.hightwo.js.MyClock;
 import tw.hightwo.js.MyPanelV2;
 
 public class Mysign extends JFrame {
@@ -28,6 +28,7 @@ public class Mysign extends JFrame {
 
 	private JButton clear, undo, redo, color, saveObj, loadObj, saveJPEG;
 	private JComboBox<Float> strokeSizeComboBox;
+	private MyClock myClock;
 	// lineSize;
 	// -------------------------
 
@@ -46,6 +47,7 @@ public class Mysign extends JFrame {
 		saveObj = new JButton("Save Object");
 		loadObj = new JButton("load Object");
 		saveJPEG = new JButton("Save JPEG");
+		myClock = new MyClock();
 		
 		Float[] strokeSizes = {1.0f, 2.0f, 4.0f, 6.0f};
 		strokeSizeComboBox = new JComboBox<>(strokeSizes);
@@ -61,6 +63,7 @@ public class Mysign extends JFrame {
 		top.add(saveJPEG);
 		top.add(strokeSizeComboBox);
 //		top.add(lineSize);
+		top.add(myClock);
 		add(top, BorderLayout.NORTH);
 
 		setSize(800, 600);
