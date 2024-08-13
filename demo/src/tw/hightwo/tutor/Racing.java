@@ -16,13 +16,15 @@ public class Racing extends JFrame {
 
 	public Racing() {
 		super("Racing");
-
+		
+		
+		//視窗排版建置，建好之後依序塞入
 		setLayout((new GridLayout(9, 1)));
 		go = new JButton("Go!");
 		add(go);
 		lanes = new JLabel[8];
-		for (int i = 0; i < lanes.length; i++) {
-			lanes[i] = new JLabel(String.format("%d. ", (i + 1)));
+		for (int i = 0; i < lanes.length; i++) {//format無法使用中文
+			lanes[i] = new JLabel(String.format("Number%d. ", (i + 1)));
 			add(lanes[i]);
 		}
 
@@ -33,24 +35,29 @@ public class Racing extends JFrame {
 	}
 
 	private void initGame() {
+	//這是go按鈕	
 		go.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				go();
+			//這是go方法
+				gamestart();
 			}
 		});
 	}
 
-	private void go() {
+	private void gamestart() {
 		rank = 0;
 		for(int i = 0; i < lanes.length; i++) {
-			lanes[i].setText(String.format("%d. ", (i+1)));
+									//format無法使用中文
+			lanes[i].setText(String.format("%d.", (i+1)));
 		}
+		//全部初始化
 		cars = new Car[8];
 		for (int i = 0; i < cars.length; i++) {
 			cars[i] = new Car(i);
 		}
+		//再一次start   //且會並行運行
 		for (int i = 0; i < cars.length; i++) {
 			cars[i].start();
 		}
