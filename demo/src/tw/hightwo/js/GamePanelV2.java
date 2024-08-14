@@ -22,6 +22,8 @@ public class GamePanelV2 extends JPanel {
 	
 	public GamePanelV2() {
 		setBackground(Color.YELLOW);
+		
+		//把所有變數都需要讀取的讀取，然後賦值
 		try {
 			ballImgs = new BufferedImage[]{
 					ImageIO.read(new File("dir1/ball0.png")),
@@ -35,14 +37,16 @@ public class GamePanelV2 extends JPanel {
 		}
 		
 		balls = new LinkedList<>();
+		
 		addMouseListener(new MyListener());
 		timer = new Timer();
-		timer.scheduleAtFixedRate(new RefreshView(), 0, 17);
+		timer.scheduleAtFixedRate(new RefreshView(), 0, 16);
 	}
-	
+	//MyListener 類別覆寫了 MouseAdapter 的 mouseClicked 方法
 	private class MyListener extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			//原本的寬 - 一個球尺寸的一半 = 
 			int ex = e.getX() - (int)(ballW / 2.0);
 			int ey = e.getY() - (int)(ballH / 2.0);
 			
@@ -59,7 +63,7 @@ public class GamePanelV2 extends JPanel {
 			repaint();
 		}
 	}
-	
+	//BallTask 是一個內部類別，繼承了 TimerTask，這樣它就可以被 Timer 調度並定期執行。
 	private class BallTask extends TimerTask {
 		private int x, y, dx, dy;
 		private int img;
@@ -107,7 +111,8 @@ public class GamePanelV2 extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		viewW = getWidth(); viewH = getHeight();
+		viewW = getWidth(); 
+		viewH = getHeight();
 		
 		for (BallTask ball : balls) {
 			g.drawImage(ballImgs[ball.getImg()], ball.getX(), ball.getY(), null);

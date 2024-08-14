@@ -20,8 +20,9 @@ public class hightwo61 {
 
 		try {
 			URL url = new URL("https://data.moa.gov.tw/Service/OpenData/ODwsv/ODwsvAgriculturalProduce.aspx");
-			URLConnection conn = url.openConnection();
+			URLConnection conn = url.openConnection();			//URLConnection中的方法
 			BufferedInputStream bin = new BufferedInputStream(conn.getInputStream());
+			//逐行讀取資料
 			BufferedReader reader = new BufferedReader(new InputStreamReader(bin));
 
 			String line;
