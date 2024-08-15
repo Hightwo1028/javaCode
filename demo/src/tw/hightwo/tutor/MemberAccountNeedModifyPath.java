@@ -1,4 +1,4 @@
-package tw.hightwo.tutor;
+//your package
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,13 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import org.mindrot.BCrypt;
-
-public class MemberAccount extends JFrame {
+public class MemberAccountNeedModifyPath extends JFrame {
 
     private Scanner scanner;  
 
-    public MemberAccount() {
+    public MemberAccountNeedModifyPath() {
         scanner = new Scanner(System.in);  
 
         JButton registerButton = new JButton("Create Account For Your Dessert");
@@ -51,37 +49,29 @@ public class MemberAccount extends JFrame {
     }
 
     private void createAccount() {
-        while (true) {
-            System.out.println("Account");
-            String account = scanner.next();
+        System.out.println("Account");
+        String account = scanner.next();
 
-            if (isAccountExists(account)) {
-                System.out.println("帳號已存在，請重新輸入你欲創立的帳號。");
-            } else {
-                System.out.println("Password");
-                String password = scanner.next();
-                String encryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-                System.out.println("Email");
-                String email = scanner.next();
-                String acCreateTime = LocalDateTime.now().toString();
+        if (isAccountExists(account)) {
+            System.out.println("帳號已存在，請重新輸入你欲創立的帳號。");
+            createAccount();
+        } else {
+            System.out.println("Password");
+            String password = scanner.next();
+            System.out.println("Email");
+            String email = scanner.next();
+            String acCreateTime = LocalDateTime.now().toString();
 
-                String url = "jdbc:mysql://localhost:3306/Hightwo";
-                Properties prop = getDatabaseProperties();
+            String url = "jdbc:mysql://localhost:3306/Hightwo";
+            Properties prop = new Properties();
+            prop.put("user", "root");
+            prop.put("password", "root");
 
-                outputToDatabase(url, prop, account, encryptedPassword, email, acCreateTime);
-                break;
-            }
+            outputToDatabase(url, prop, account, password, email, acCreateTime);
         }
     }
 
-    private Properties getDatabaseProperties() {
-        Properties prop = new Properties();
-        prop.put("user", "root");
-        prop.put("password", "root");
-        return prop;
-    }
-    
-	private void LoginAccount() {
+    private void LoginAccount() {
         String url = "jdbc:mysql://localhost:3306/Hightwo";
         Properties prop = new Properties();
         prop.put("user", "root");
@@ -109,7 +99,7 @@ public class MemberAccount extends JFrame {
     }
 
     public static void main(String[] args) {
-        new MemberAccount();
+        new MemberAccountNeedModifyPath();
     }
 
     private static void outputToDatabase(String url, Properties prop, String account, String password, String email, String acCreateTime) {
@@ -158,7 +148,7 @@ public class MemberAccount extends JFrame {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     String storedPassword = rs.getString("password");
-                    return BCrypt.checkpw(password, storedPassword);
+                    return password.equals(storedPassword);
                 } else {
                     return false;
                 }

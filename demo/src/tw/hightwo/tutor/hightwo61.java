@@ -9,10 +9,13 @@ import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.Properties;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.mysql.cj.x.protobuf.MysqlxSql.StmtExecute;
 
 public class hightwo61 {
 
@@ -52,6 +55,11 @@ public class hightwo61 {
 
 		try {
 			Connection conn = DriverManager.getConnection(url, prop);
+			
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("DELETE FROM gift");
+			stmt.executeUpdate("ALTER TABLE gift AUTO_INCREMENT = 1");
+			
 			String sql = "INSERT INTO gift (name, feature, addr, picurl, city, town, lat, lng)"
 					+ " VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
