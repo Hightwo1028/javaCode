@@ -2,7 +2,7 @@ package tw.hightwo.js;
 
 import java.io.Serializable;
 
-public class Bike extends Object implements Serializablei {
+public class Bike extends Object implements Serializable {
 	//public > protected(子類別+相同package > 沒寫(相同package) > pravite
 	protected double speed;
 	
