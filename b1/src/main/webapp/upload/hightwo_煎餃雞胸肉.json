@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "水",
+    "protein": 0,
+    "fat": 0,
+    "carbohydrate": 0,
+    "calorie": 0,
+    "serve": 100,
+    "newServe": null
+  },
+  {
+    "id": 2,
+    "name": "雞胸肉",
+    "protein": 31,
+    "fat": 3.6,
+    "carbohydrate": 0,
+    "calorie": 164,
+    "serve": 100,
+    "newServe": null
+  },
+  {
+    "id": 3,
+    "name": "煎餃",
+    "protein": 12,
+    "fat": 25,
+    "carbohydrate": 23.5,
+    "calorie": 367,
+    "serve": 100,
+    "newServe": null
+  }
+]
