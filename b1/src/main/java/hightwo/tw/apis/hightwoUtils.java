@@ -3,7 +3,6 @@ package hightwo.tw.apis;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class hightwoUtils {
 	public static String loadView(String view) throws Exception {
@@ -16,5 +15,15 @@ public class hightwoUtils {
 		bin.close();
 		
 		return new String(buf);
+	}
+				//網頁傳回來的參數永遠都是字串
+	public static String calc(String x, String y) {
+		try {
+			int intX = Integer.parseInt(x);
+			int intY = Integer.parseInt(y);
+			return intX + intY + "";
+		} catch (Exception e) {
+			return "";
+		}
 	}
 }
