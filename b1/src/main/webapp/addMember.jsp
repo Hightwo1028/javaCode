@@ -23,7 +23,7 @@
 	<sql:update>
 		INSERT INTO member (account, passwd, name) VALUES (?, ?, ?)
 		<sql:param>${param.account }</sql:param>
-		<sql:param>${BCrypt.hashpw(plain_password, BCrypt.gensalt()) }</sql:param>
+		<sql:param>${BCrypt.hashpw(passwd, BCrypt.gensalt()) }</sql:param>
 		<sql:param>${param.name }</sql:param>
 	</sql:update>
 	<c:redirect	url="main.jsp"></c:redirect>
