@@ -209,4 +209,14 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Hightwo22</display-name>
+    <servlet-name>Hightwo22</servlet-name>
+    <servlet-class>b1.Hightwo22</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hightwo22</servlet-name>
+    <url-pattern>/Hightwo22</url-pattern>
+  </servlet-mapping>
 </web-app>

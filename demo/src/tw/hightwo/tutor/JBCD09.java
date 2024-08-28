@@ -19,7 +19,7 @@ public class JBCD09 {
 		prop.put("user", "root");
 		prop.put("password", "root");
 
-		String url = "jdbc:mysql://127.0.0.1:3306/Hightwo";
+		String url = "jdbc:mysql://127.0.0.1:3306/hightwo";
 
 		try {
 			conn = DriverManager.getConnection(url, prop);

@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<taglib
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee web-jsptaglibrary_2_1.xsd"
-    xmlns="http://java.sun.com/xml/ns/javaee"|
-     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     version="2.1">
-     
-     <tlib-version>1.0</tlib-version>
-     <short-name>Hello</short-name>
-     <tag>
-     	<name>hello</name>
-     	<tag-class>tw.brad.tags.HelloTag</tag-class>
-     	<body-content>empty</body-content>
-     	<attribute>
-     		<name>name</name>
-     		<required>true</required>
-     	</attribute>
-     </tag>
-     
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
+	
+<!-- <taglib xmlns="https://jakarta.ee/xml/ns/jsp"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/jsp
+        https://jakarta.ee/xml/ns/jsp/jsp-taglib_2_1.xsd"
+        version="2.1">
+ -->    
+    <!-- 定义标签库的 URI 和前缀 -->
+    <tlib-version>1.0</tlib-version>
+ 	<short-name>hello</short-name>	<!-- 可有可無, 開發人員識別用 -->
+ 		
+    <tag>
+	    <name>hello</name>
+	    <tag-class>tw.hightwo.tags.HelloTag</tag-class>
+	    <body-content>JSP</body-content>	<!-- empty 沒有 innerHTML,  -->
+        <attribute>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue> <!-- 是否支援 EL -->
+        </attribute>	    
+    </tag>
 </taglib>
